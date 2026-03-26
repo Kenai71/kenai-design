@@ -30,7 +30,7 @@ const portfolioItems: PortfolioItem[] = [
   { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrls: ["/img/kenzo.png"], showInAll: true },
   { id: 3, title: "Site Barbeiro", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrls: ["/img/site-barbeiro.png"], showInAll: true },
   { id: 4, title: "Story Instagram", category: "Storys", imageUrls: ["/img/story-insta.png"], showInAll: true },
-  { id: 5, title: "Modelo de Carrossel", category: "Carrosseis", imageUrls: ["/img/carrossel.png", "/img/carrossel2.png"], showInAll: true },
+  { id: 5, title: "Modelo de Carrossel", category: "Carrosseis", imageUrls: ["/img/carrossel/carrossel.png", "/img/carrossel/carrossel2.png"], showInAll: true },
   { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/post-insta.png"], showInAll: true },
   { id: 7, title: "Modelo de Logo", category: "Logos", imageUrls: ["/img/logo1.png"], showInAll: true },
   { id: 8, title: "Faixa de Youtube", category: "Artes", imageUrls: ["/img/enzo-body.png"], showInAll: true },

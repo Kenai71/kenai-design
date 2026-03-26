@@ -394,7 +394,7 @@ export default function Home() {
               <a href="mailto:kenaidesign22@gmail.com" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Mail className="w-5 h-5" /></a>
               <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
                 <span className="text-zinc-300 font-medium">Contato</span>
-                <span>(71) 99338-3703</span>
+                <span>(71) 99739-1105</span>
                 <span>kenaidesign22@gmail.com</span>
               </div>
             </div>

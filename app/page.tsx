@@ -20,7 +20,7 @@ const portfolioItems: PortfolioItem[] = [
   { id: 3, title: "Site Barbearia", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrl: "/img/site-barbeiro.png" },
   { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrl: "" },
   { id: 5, title: "[Nome do Carrossel 1]", category: "Carrosseis", imageUrl: "" },
-  { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrl: "" },
+  { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrl: "/img/post-insta.png" },
   { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrl: "" },
   { id: 8, title: "Capa de Ebook", category: "Artes", imageUrl: "/img/capa-ebook.png" },
   { id: 9, title: "Faixa de Youtube", category: "Artes", imageUrl: "/img/enzo-body.png" },

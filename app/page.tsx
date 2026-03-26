@@ -15,14 +15,14 @@ const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrl: string };
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "[Nome da Arte 1]", category: "Artes", imageUrl: "" },
-  { id: 2, title: "[Nome do Logo 1]", category: "Logos", imageUrl: "" },
-  { id: 3, title: "Site Exemplo", category: "Designs", link: "https://www.google.com", imageUrl: "" },
+  { id: 1, title: "Capa de Portfólio", category: "Artes", imageUrl: "/img/portfolio1.png" },
+  { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrl: "/img/kenzo.png" },
+  { id: 3, title: "Site Barbearia", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrl: "/img/site-barbeiro.png" },
   { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrl: "" },
   { id: 5, title: "[Nome do Carrossel 1]", category: "Carrosseis", imageUrl: "" },
   { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrl: "" },
   { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrl: "" },
-  { id: 8, title: "[Nome da Arte 2]", category: "Artes", imageUrl: "" },
+  { id: 8, title: "Capa de Ebook", category: "Artes", imageUrl: "/img/capa-ebook.png" },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];

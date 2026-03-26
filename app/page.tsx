@@ -37,8 +37,8 @@ const portfolioItems: PortfolioItem[] = [
 
   // --- ITENS EXTRAS (NÃO aparecem em "Todos", apenas na categoria específica) ---
   // Podes adicionar mais itens aqui seguindo este modelo:
-  { id: 9, title: "Fotografia Extra 1", category: "Fotografia", imageUrls: ["/img/post-insta.png"], showInAll: false },
-  { id: 10, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
+  
+  { id: 9, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];

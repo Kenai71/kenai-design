@@ -12,32 +12,48 @@ const Palette = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox
 const Smartphone = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>);
 const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
 
-type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrl: string };
+// --- DADOS DO PORTFÓLIO (AGORA ACEITA MÚLTIPLAS IMAGENS) ---
+// Para adicionar mais imagens, basta separar por vírgula: imageUrls: ["/img/f1.png", "/img/f2.png"]
+type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrls: string[] };
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "Capa de Portfólio", category: "Artes", imageUrl: "/img/portfolio1.png" },
-  { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrl: "/img/kenzo.png" },
-  { id: 3, title: "Site Barbearia", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrl: "/img/site-barbeiro.png" },
-  { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrl: "" },
-  { id: 5, title: "[Nome do Carrossel 1]", category: "Carrosseis", imageUrl: "" },
-  { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrl: "/img/post-insta.png" },
-  { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrl: "" },
-  { id: 8, title: "Capa de Ebook", category: "Artes", imageUrl: "/img/capa-ebook.png" },
-  { id: 9, title: "Faixa de Youtube", category: "Artes", imageUrl: "/img/enzo-body.png" },
+  { id: 1, title: "[Nome da Arte 1]", category: "Artes", imageUrls: [] },
+  { id: 2, title: "[Nome do Logo 1]", category: "Logos", imageUrls: [] },
+  { id: 3, title: "Site Exemplo", category: "Designs", link: "https://www.google.com", imageUrls: [] },
+  { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrls: [] },
+  { id: 5, title: "Exemplo Carrossel (Múltiplo)", category: "Carrosseis", imageUrls: [] }, // Coloque várias URLs aqui dentro depois
+  { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrls: [] },
+  { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrls: [] },
+  { id: 8, title: "[Nome da Arte 2]", category: "Artes", imageUrls: [] },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];
-const brands = ["CLIENTE PRESTÍGIO", "INOVAÇÃO CORP", "ESTÚDIO VISUAL", "TECNOLOGIA LTDA", "SALVADOR CREATIVE", "CLIENTE PRESTÍGIO", "INOVAÇÃO CORP", "ESTÚDIO VISUAL", "TECNOLOGIA LTDA", "SALVADOR CREATIVE"];
+
+// --- DADOS DAS MARCAS (AGORA ACEITA IMAGENS E TEXTO) ---
+type BrandItem = { type: "image"; src: string; alt: string } | { type: "text"; content: string };
+
+const brands: BrandItem[] = [
+  { type: "image", src: "/img/arkad.png", alt: "Arkad" },
+  { type: "image", src: "/img/patty.png", alt: "Patty" },
+  { type: "image", src: "/img/logo-barbeiro.png", alt: "Barbeiro" },
+  { type: "image", src: "/img/kells.png", alt: "Kells" },
+  { type: "text", content: "CLIENTE PRESTÍGIO" }, // Se quiser colocar um só com texto, é assim!
+  
+  // Duplicando a lista para garantir que a rolagem infinita não quebre (Fique suave)
+  { type: "image", src: "/img/arkad.png", alt: "Arkad" },
+  { type: "image", src: "/img/patty.png", alt: "Patty" },
+  { type: "image", src: "/img/logo-barbeiro.png", alt: "Barbeiro" },
+  { type: "image", src: "/img/kells.png", alt: "Kells" },
+  { type: "text", content: "CLIENTE PRESTÍGIO" },
+];
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("Todos");
-  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
-  
-  // Estado do Loading
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Animação de Loading (Mais Rápida - 1.2 segundos)
+  // Animação de Loading Inicial
   useEffect(() => {
     let start = 0;
     const duration = 1200; 
@@ -58,13 +74,14 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  // Trava scroll no Modal
   useEffect(() => {
-    if (selectedImage || isLoading) document.body.style.overflow = "hidden";
+    if (selectedItem || isLoading) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
-  }, [selectedImage, isLoading]);
+  }, [selectedItem, isLoading]);
 
   const filteredItems = activeFilter === "Todos" ? portfolioItems : portfolioItems.filter(item => item.category === activeFilter);
-  const handleCardClick = (item: PortfolioItem) => item.link ? window.open(item.link, "_blank") : setSelectedImage(item);
+  const handleCardClick = (item: PortfolioItem) => item.link ? window.open(item.link, "_blank") : setSelectedItem(item);
 
   return (
     <>
@@ -78,7 +95,6 @@ export default function Home() {
             className="fixed inset-0 z-[9999] bg-[#030303] flex flex-col items-center justify-center pointer-events-none"
           >
             <div className="flex flex-col items-center gap-8">
-              {/* Logo com Ponto Azul restaurada */}
               <motion.h2 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -104,13 +120,12 @@ export default function Home() {
 
       <main className="min-h-screen relative selection:bg-blue-600 selection:text-white pb-10">
         
-        {/* --- HEADER FIXO CENTRALIZADO --- */}
+        {/* --- HEADER FIXO --- */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 bg-[#030303]/80 backdrop-blur-md border-b border-zinc-900/50 transition-all">
           <div className="max-w-[1400px] mx-auto relative flex justify-center items-center h-8">
             <a href="#" className="absolute left-0 text-2xl font-black tracking-tighter text-white uppercase">
               KENAI<span className="text-blue-500">.</span>
             </a>
-            
             <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-zinc-400">
               <a href="#trabalhos" className="hover:text-white transition-colors">Trabalhos</a>
               <a href="#marcas" className="hover:text-white transition-colors">Marcas</a>
@@ -162,7 +177,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* --- PORTFÓLIO E FILTROS --- */}
+        {/* --- PORTFÓLIO --- */}
         <section id="trabalhos" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10 relative scroll-mt-20">
           <div className="flex flex-col items-center mb-16">
             <motion.h2 
@@ -189,11 +204,7 @@ export default function Home() {
                   }`}
                 >
                   {activeFilter === cat && (
-                    <motion.div 
-                      layoutId="active-pill" 
-                      className="absolute inset-0 bg-white rounded-full" 
-                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    />
+                    <motion.div layoutId="active-pill" className="absolute inset-0 bg-white rounded-full" transition={{ type: "spring", stiffness: 300, damping: 25 }} />
                   )}
                   <span className="relative z-10">{cat}</span>
                 </button>
@@ -214,8 +225,9 @@ export default function Home() {
                   onClick={() => handleCardClick(item)}
                   className="group relative aspect-[4/5] bg-zinc-900/50 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800/50 hover:border-blue-500/30 transition-all"
                 >
-                  {item.imageUrl ? (
-                    <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  {/* Na tela principal, mostra apenas a PRIMEIRA IMAGEM (índice 0) */}
+                  {item.imageUrls && item.imageUrls.length > 0 ? (
+                    <img src={item.imageUrls[0]} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/20 group-hover:bg-zinc-800/40 transition-colors duration-500">
                       <span className="text-zinc-600 text-sm opacity-50">[ Img: {item.title} ]</span>
@@ -241,21 +253,31 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* --- CLIENTES --- */}
+        {/* --- CLIENTES (CARROSSEL COM IMAGENS E TEXTO) --- */}
         <section id="marcas" className="py-24 border-y border-zinc-900/50 bg-zinc-950/30 relative z-10 scroll-mt-20 overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-6 mb-12">
+          <div className="max-w-[1400px] mx-auto px-6 mb-16">
             <p className="text-center text-zinc-500 text-sm uppercase tracking-[0.2em]">Marcas que confiam no trabalho</p>
           </div>
           <div className="w-full relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <motion.div 
-              className="flex gap-24 shrink-0 w-max px-12"
+              className="flex items-center gap-16 md:gap-24 shrink-0 w-max px-12"
               animate={{ x: ["-50%", "0%"] }} 
-              transition={{ repeat: Infinity, ease: "linear", duration: 25 }} 
+              transition={{ repeat: Infinity, ease: "linear", duration: 30 }} // Deixei 30s pra passar suave
             >
               {brands.map((brand, index) => (
-                <span key={index} className="text-2xl md:text-3xl font-bold text-zinc-600 hover:text-zinc-200 transition-colors whitespace-nowrap">
-                  {brand}
-                </span>
+                <div key={index} className="flex items-center justify-center shrink-0">
+                  {brand.type === "image" ? (
+                    <img 
+                      src={brand.src} 
+                      alt={brand.alt} 
+                      className="h-12 md:h-16 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" 
+                    />
+                  ) : (
+                    <span className="text-2xl md:text-3xl font-bold text-zinc-600 hover:text-zinc-200 transition-colors whitespace-nowrap">
+                      {brand.content}
+                    </span>
+                  )}
+                </div>
               ))}
             </motion.div>
           </div>
@@ -291,7 +313,7 @@ export default function Home() {
                 Sobre <span className="text-blue-500">mim.</span>
               </h2>
               <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed text-center lg:text-left">
-                <p>Olá, eu sou o Kenai Almeida. Aos 19 anos, dedico minha trajetória a construir o futuro da web.</p>
+                <p>Olá, eu sou o Kenai Almeida. Aos 19 anos, residindo em Salvador, Bahia, dedico minha trajetória a construir o futuro da web.</p>
                 <p>Atuo como Programador Full Stack, Web Designer e Designer Gráfico. Minha formação em Tecnologia da Internet pelo SENAI/CIMATEC me proporcionou a base técnica necessária para entender que um bom design não é apenas visualmente atraente, mas também estruturalmente impecável e focado em conversão.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
                   <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-2xl">
@@ -325,29 +347,47 @@ export default function Home() {
               <a href="mailto:kenaidesign22@gmail.com" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Mail className="w-5 h-5" /></a>
               <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
                 <span className="text-zinc-300 font-medium">Contato</span>
-                <span>(71) 99739-1105</span>
+                <span>(71) 99338-3703</span>
                 <span>kenaidesign22@gmail.com</span>
               </div>
             </div>
           </div>
         </footer>
 
-        {/* --- MODAL DE IMAGEM FULLSCREEN --- */}
+        {/* --- MODAL DE IMAGEM FULLSCREEN (SCROLL MÚLTIPLAS IMAGENS) --- */}
         <AnimatePresence>
-          {selectedImage && (
+          {selectedItem && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-sm"
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedItem(null)}
             >
-              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-white rounded-full transition-colors z-[110]" onClick={() => setSelectedImage(null)}><XIcon className="w-6 h-6" /></button>
-              <motion.div layoutId={`card-${selectedImage.id}`} className="relative w-full max-w-6xl max-h-full bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
-                {selectedImage.imageUrl ? <img src={selectedImage.imageUrl} alt={selectedImage.title} className="w-full max-h-[85vh] object-contain bg-black" /> : <div className="w-full aspect-video flex items-center justify-center bg-zinc-800 p-8 text-center"><span className="text-zinc-500 text-xl">[ Sua Imagem de {selectedImage.title} aparecerá gigante aqui ]</span></div>}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-                  <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">{selectedImage.category}</p>
-                  <h3 className="text-3xl font-bold text-white">{selectedImage.title}</h3>
+              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-white rounded-full transition-colors z-[110]" onClick={() => setSelectedItem(null)}><XIcon className="w-6 h-6" /></button>
+              
+              <motion.div layoutId={`card-${selectedItem.id}`} className="relative w-full max-w-6xl max-h-[90vh] bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex flex-col" onClick={(e) => e.stopPropagation()}>
+                
+                {/* --- ÁREA DE SCROLL (ONDE FICAM AS VÁRIAS IMAGENS) --- */}
+                {/* Esconde a barra de scroll no estilo Tailwind para ficar clean */}
+                <div className="flex-1 overflow-y-auto bg-black p-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 ? (
+                    <div className="flex flex-col gap-2">
+                      {selectedItem.imageUrls.map((url, i) => (
+                        <img key={i} src={url} alt={`${selectedItem.title} - ${i + 1}`} className="w-full h-auto object-contain" />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="w-full aspect-video flex items-center justify-center bg-zinc-800 p-8 text-center h-full">
+                      <span className="text-zinc-500 text-xl">[ Suas Imagens de {selectedItem.title} aparecerão aqui ]</span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Informações Fixas em Baixo */}
+                <div className="p-6 bg-gradient-to-t from-black/90 to-black/80 shrink-0 border-t border-zinc-800/50">
+                  <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">{selectedItem.category}</p>
+                  <h3 className="text-3xl font-bold text-white">{selectedItem.title}</h3>
                 </div>
               </motion.div>
             </motion.div>

@@ -252,7 +252,7 @@ export default function Home() {
             </a>
             <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
               <span className="text-zinc-300 font-medium">Contato</span>
-              <span>(71) 99338-3703</span>
+              <span>(71) 99739-1105</span>
               <span>kenaidesign22@gmail.com</span>
             </div>
           </div>

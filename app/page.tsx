@@ -39,6 +39,7 @@ const portfolioItems: PortfolioItem[] = [
   // Podes adicionar mais itens aqui seguindo este modelo:
   
   { id: 9, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
+  { id: 10, title: "Landing Page", category: "Designs", imageUrls: ["/img/modelo-landing.png"], showInAll: false },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];

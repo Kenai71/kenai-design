@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-// Usando a Inter (A fonte padrão de ouro para UI Design) e liberando o peso 900 (Black)
+// 1. Fonte padrão para os textos normais
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"], 
+  variable: "--font-inter",
+});
+
+// 2. Fonte EXTREMAMENTE GROSSA para o "KENAI DESIGN"
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["900"], // Peso máximo (Black)
+  variable: "--font-montserrat",
+});
+
+// 3. Fonte ELEGANTE E CLÁSSICA para a Logo "Kenai."
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "700", "900"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} bg-[#030303] text-zinc-100 antialiased overflow-x-hidden`}>
+      {/* Injetando as variáveis de fonte no Body */}
+      <body className={`${inter.variable} ${montserrat.variable} ${playfair.variable} font-sans bg-[#030303] text-zinc-100 antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

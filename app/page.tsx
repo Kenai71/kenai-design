@@ -15,17 +15,30 @@ const ChevronLeft = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" vie
 const ChevronRight = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="9 18 15 12 9 6"/></svg>);
 
 // --- DADOS DO PORTFÓLIO ---
-type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrls: string[] };
+type PortfolioItem = { 
+  id: number; 
+  title: string; 
+  category: string; 
+  link?: string; 
+  imageUrls: string[];
+  showInAll?: boolean; // Propriedade nova: se for false, não aparece na aba "Todos"
+};
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "Capa de Portfólio", category: "Artes", imageUrls: ["/img/portfolio1.png"] },
-  { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrls: ["/img/kenzo.png"] },
-  { id: 3, title: "Site Barbeiro", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrls: ["/img/site-barbeiro.png"] },
-  { id: 4, title: "Story Instagram", category: "Storys", imageUrls: ["/img/story-insta.png"] },
-  { id: 5, title: "Modelo de Carrossel", category: "Carrosseis", imageUrls: ["/img/carrossel.png", "/img/carrossel2.png"] },
-  { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/post-insta.png"] },
-  { id: 7, title: "Modelo de Logo", category: "Logos", imageUrls: ["/img/logo1.png"] },
-  { id: 8, title: "Faixa de Youtube", category: "Artes", imageUrls: ["/img/enzo-body.png"] },
+  // --- ITENS PRINCIPAIS (Aparecem em "Todos") ---
+  { id: 1, title: "Capa de Portfólio", category: "Artes", imageUrls: ["/img/portfolio1.png"], showInAll: true },
+  { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrls: ["/img/kenzo.png"], showInAll: true },
+  { id: 3, title: "Site Barbeiro", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrls: ["/img/site-barbeiro.png"], showInAll: true },
+  { id: 4, title: "Story Instagram", category: "Storys", imageUrls: ["/img/story-insta.png"], showInAll: true },
+  { id: 5, title: "Modelo de Carrossel", category: "Carrosseis", imageUrls: ["/img/carrossel.png", "/img/carrossel2.png"], showInAll: true },
+  { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/post-insta.png"], showInAll: true },
+  { id: 7, title: "Modelo de Logo", category: "Logos", imageUrls: ["/img/logo1.png"], showInAll: true },
+  { id: 8, title: "Faixa de Youtube", category: "Artes", imageUrls: ["/img/enzo-body.png"], showInAll: true },
+
+  // --- ITENS EXTRAS (NÃO aparecem em "Todos", apenas na categoria específica) ---
+  // Podes adicionar mais itens aqui seguindo este modelo:
+  { id: 9, title: "Fotografia Extra 1", category: "Fotografia", imageUrls: ["/img/post-insta.png"], showInAll: false },
+  { id: 10, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];
@@ -83,7 +96,10 @@ export default function Home() {
     else document.body.style.overflow = "auto";
   }, [selectedItem, isLoading]);
 
-  const filteredItems = activeFilter === "Todos" ? portfolioItems : portfolioItems.filter(item => item.category === activeFilter);
+  // Lógica de Filtragem Atualizada
+  const filteredItems = activeFilter === "Todos" 
+    ? portfolioItems.filter(item => item.showInAll !== false) 
+    : portfolioItems.filter(item => item.category === activeFilter);
   
   const handleCardClick = (item: PortfolioItem) => {
     if (item.link) {
@@ -247,7 +263,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }} // Substituído "elástico" por fade in/out básico
+                  transition={{ duration: 0.3 }}
                   onClick={() => handleCardClick(item)}
                   className="group relative aspect-[4/5] bg-zinc-900/50 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800/50 hover:border-blue-500/30 transition-all"
                 >
@@ -320,10 +336,11 @@ export default function Home() {
               className="lg:col-span-5 flex justify-center lg:justify-start"
             >
               <div className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 relative group shrink-0 shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center text-zinc-600 flex-col gap-4 text-center p-4">
-                  <Palette className="w-10 h-10 opacity-50" />
-                  <span className="text-sm tracking-widest uppercase">[ /img]</span>
-                </div>
+                <img 
+                  src="/img/1.png" 
+                  alt="Kenai Almeida" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/50 rounded-3xl transition-colors duration-500 pointer-events-none" />
               </div>
             </motion.div>
@@ -373,7 +390,7 @@ export default function Home() {
               <a href="mailto:kenaidesign22@gmail.com" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Mail className="w-5 h-5" /></a>
               <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
                 <span className="text-zinc-300 font-medium">Contato</span>
-                <span>(71) 99739-1105</span>
+                <span>(71) 99338-3703</span>
                 <span>kenaidesign22@gmail.com</span>
               </div>
             </div>
@@ -387,7 +404,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }} // Animação de fade rápida e simples pro fundo
+              transition={{ duration: 0.2 }}
               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-sm"
               onClick={() => setSelectedItem(null)}
             >
@@ -399,7 +416,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }} // Animação de fechar simples (fade normal sem elástico)
+                transition={{ duration: 0.2 }}
                 className="relative w-full max-w-6xl h-[85vh] md:h-[90vh] bg-zinc-950 rounded-xl overflow-hidden shadow-2xl flex flex-col" 
                 onClick={(e) => e.stopPropagation()}
               >

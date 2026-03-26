@@ -31,13 +31,15 @@ const brands = ["CLIENTE PRESTÍGIO", "INOVAÇÃO CORP", "ESTÚDIO VISUAL", "TEC
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("Todos");
   const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+  
+  // Estado do Loading
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Animação de Loading Inicial
+  // Animação de Loading (Mais Rápida - 1.2 segundos)
   useEffect(() => {
     let start = 0;
-    const duration = 2000; // O loading dura 2 segundos
+    const duration = 1200; 
     const intervalTime = 20;
     const step = 100 / (duration / intervalTime);
     
@@ -46,7 +48,7 @@ export default function Home() {
       if (start >= 100) {
         setLoadingProgress(100);
         clearInterval(timer);
-        setTimeout(() => setIsLoading(false), 400); // Fecha o loading após chegar a 100%
+        setTimeout(() => setIsLoading(false), 300);
       } else {
         setLoadingProgress(Math.floor(start));
       }
@@ -55,7 +57,6 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Trava scroll no Modal ou Loading
   useEffect(() => {
     if (selectedImage || isLoading) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
@@ -72,22 +73,22 @@ export default function Home() {
           <motion.div 
             key="preloader"
             initial={{ y: 0 }}
-            exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }} // Curva de aceleração de grife
+            exit={{ y: "-100%", transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] } }} 
             className="fixed inset-0 z-[9999] bg-[#030303] flex flex-col items-center justify-center pointer-events-none"
           >
-            <div className="flex flex-col items-center gap-6">
-              {/* Logo Elegante no Centro */}
+            <div className="flex flex-col items-center gap-8">
+              {/* Logo com Ponto Azul restaurada */}
               <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-6xl md:text-8xl font-serif italic text-white"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="text-5xl md:text-7xl font-black tracking-tighter text-white"
               >
-                Kenai.
+                Kenai<span className="text-blue-500">.</span>
               </motion.h2>
               
               <div className="flex flex-col items-center gap-3">
-                <span className="text-blue-500 font-mono text-2xl tracking-widest">{loadingProgress}%</span>
+                <span className="text-blue-500 font-mono text-sm tracking-widest">{loadingProgress}%</span>
                 <div className="w-48 h-[2px] bg-zinc-800 relative overflow-hidden rounded-full">
                   <motion.div 
                     className="absolute top-0 left-0 bottom-0 bg-blue-500"
@@ -102,12 +103,11 @@ export default function Home() {
 
       <main className="min-h-screen relative selection:bg-blue-600 selection:text-white pb-10">
         
-        {/* --- HEADER FIXO --- */}
+        {/* --- HEADER FIXO CENTRALIZADO --- */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 bg-[#030303]/80 backdrop-blur-md border-b border-zinc-900/50 transition-all">
           <div className="max-w-[1400px] mx-auto relative flex justify-center items-center h-8">
-            {/* Logo usando a Fonte Serifada Elegante */}
-            <a href="#" className="absolute left-0 text-3xl font-serif italic text-white">
-              Kenai.
+            <a href="#" className="absolute left-0 text-2xl font-black tracking-tighter text-white uppercase">
+              KENAI<span className="text-blue-500">.</span>
             </a>
             
             <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-zinc-400">
@@ -126,14 +126,14 @@ export default function Home() {
         <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden pt-20">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
-            animate={!isLoading ? { opacity: 1, y: 0 } : {}} // Só anima DEPOIS que o loader sumir
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            animate={!isLoading ? { opacity: 1, y: 0 } : {}} 
+            transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
             className="z-10 text-center max-w-5xl"
           >
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={!isLoading ? { scale: 1, opacity: 1 } : {}}
-              transition={{ delay: 0.4, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
               className="inline-block mb-6 px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-md"
             >
               <span className="text-sm font-medium tracking-wide text-zinc-100">
@@ -141,12 +141,11 @@ export default function Home() {
               </span>
             </motion.div>
             
-            {/* Título com a fonte GIGANTE e grossa (Montserrat Black) */}
-            <h1 className="text-7xl md:text-[8rem] lg:text-[10rem] font-title font-black tracking-tighter mb-4 leading-none">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6 leading-tight">
               KENAI <span className="text-gradient">DESIGN</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed mt-6">
+            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
               Experiências digitais imersivas, identidades visuais marcantes e desenvolvimento de alta performance.
             </p>
           </motion.div>
@@ -154,7 +153,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={!isLoading ? { opacity: 1 } : {}}
-            transition={{ delay: 1.5, duration: 1 }}
+            transition={{ delay: 1.2, duration: 1 }}
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
             <span className="text-xs uppercase tracking-widest text-zinc-500">Scroll</span>
@@ -169,7 +168,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="text-4xl md:text-6xl font-bold mb-10 tracking-tight"
+              className="text-4xl md:text-6xl font-black tracking-tighter mb-10"
             >
               Trabalhos Selecionados
             </motion.h2>
@@ -287,7 +286,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="lg:col-span-7"
             >
-              <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter text-center lg:text-left">
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 text-center lg:text-left">
                 Sobre <span className="text-blue-500">mim.</span>
               </h2>
               <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed text-center lg:text-left">
@@ -314,8 +313,8 @@ export default function Home() {
         <footer id="contato" className="py-16 border-t border-zinc-900 bg-[#020202] relative z-10">
           <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
-              <h3 className="text-4xl font-serif italic text-white mb-2">
-                Kenai.
+              <h3 className="text-3xl font-black tracking-tighter text-white mb-2 uppercase">
+                KENAI<span className="text-blue-500">.</span>
               </h3>
               <p className="text-zinc-500 text-sm">Elevando marcas através do design e tecnologia.</p>
             </div>

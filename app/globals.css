@@ -1,16 +1,9 @@
 @import "tailwindcss";
 
-/* Definindo os atalhos para as fontes premium no Tailwind V4 */
-@theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-title: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
-}
-
 :root {
   --background: #030303; 
   --foreground: #f4f4f5;
-  --accent: #3b82f6;
+  --accent: #3b82f6; 
 }
 
 body {

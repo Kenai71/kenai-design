@@ -12,7 +12,7 @@ const Palette = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox
 const Smartphone = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>);
 const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
 
-// --- DADOS TEMPORÁRIOS DO PORTFÓLIO ---
+// --- DADOS DO PORTFÓLIO ---
 type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrl: string };
 
 const portfolioItems: PortfolioItem[] = [
@@ -58,15 +58,17 @@ export default function Home() {
   return (
     <main className="min-h-screen relative selection:bg-blue-600 selection:text-white pb-10">
       
-      {/* --- HEADER FIXO --- */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-[#030303]/80 backdrop-blur-md border-b border-zinc-900/50 transition-all">
-        <div className="max-w-[1400px] mx-auto flex justify-between items-center">
-          {/* Corrigido para font-bold */}
-          <a href="#" className="text-2xl font-bold tracking-tighter text-white">
+      {/* --- HEADER FIXO CENTRALIZADO --- */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 bg-[#030303]/80 backdrop-blur-md border-b border-zinc-900/50 transition-all">
+        <div className="max-w-[1400px] mx-auto relative flex justify-center items-center h-8">
+          
+          {/* Logo fixa na esquerda usando position absolute */}
+          <a href="#" className="absolute left-0 text-2xl font-black tracking-tighter text-white">
             KENAI<span className="text-blue-500">.</span>
           </a>
           
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+          {/* Navegação perfeitamente no centro */}
+          <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-zinc-400">
             <a href="#trabalhos" className="hover:text-white transition-colors">Trabalhos</a>
             <a href="#marcas" className="hover:text-white transition-colors">Marcas</a>
             <a href="#sobre" className="hover:text-white transition-colors">Sobre mim</a>
@@ -98,8 +100,7 @@ export default function Home() {
             </span>
           </motion.div>
           
-          {/* Corrigido para font-bold */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6">
             KENAI <span className="text-gradient">DESIGN</span>
           </h1>
           
@@ -286,8 +287,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           
           <div className="text-center md:text-left">
-            {/* Corrigido para font-bold */}
-            <h3 className="text-3xl font-bold tracking-tighter text-white mb-2">
+            <h3 className="text-3xl font-black tracking-tighter text-white mb-2">
               KENAI<span className="text-blue-500">.</span>
             </h3>
             <p className="text-zinc-500 text-sm">Elevando marcas através do design e tecnologia.</p>

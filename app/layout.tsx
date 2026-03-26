@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Importando uma fonte premium e moderna
-const spaceGrotesk = Space_Grotesk({
+// Usando a Inter (A fonte padrão de ouro para UI Design) e liberando o peso 900 (Black)
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"], 
 });
 
 export const metadata: Metadata = {
@@ -19,9 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      {/* Aplicando a fonte globalmente e garantindo o fundo escuro */}
-      <body className={`${spaceGrotesk.className} bg-[#030303] text-zinc-100 antialiased overflow-x-hidden`}>
+    <html lang="pt-BR" className="scroll-smooth">
+      <body className={`${inter.className} bg-[#030303] text-zinc-100 antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

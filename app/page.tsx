@@ -1,46 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// --- ÍCONES NATIVOS (Bypass do erro do lucide-react) ---
+// --- ÍCONES NATIVOS ---
 const Instagram = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>);
 const Mail = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>);
 const ArrowUpRight = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>);
 const Code = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>);
 const Palette = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>);
 const Smartphone = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>);
+const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
 
-// --- DADOS TEMPORÁRIOS ---
-const portfolioItems = [
-  { id: 1, title: "[Nome da Arte 1]", category: "Artes" },
-  { id: 2, title: "[Nome do Logo 1]", category: "Logos" },
-  { id: 3, title: "[Nome do Design 1]", category: "Designs" },
-  { id: 4, title: "[Nome do Story 1]", category: "Storys" },
-  { id: 5, title: "[Nome do Carrossel 1]", category: "Carrosseis" },
-  { id: 6, title: "[Nome da Foto 1]", category: "Fotografia" },
-  { id: 7, title: "[Nome do Logo 2]", category: "Logos" },
-  { id: 8, title: "[Nome da Arte 2]", category: "Artes" },
+// --- DADOS TEMPORÁRIOS DO PORTFÓLIO ---
+type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrl: string };
+
+const portfolioItems: PortfolioItem[] = [
+  { id: 1, title: "[Nome da Arte 1]", category: "Artes", imageUrl: "" },
+  { id: 2, title: "[Nome do Logo 1]", category: "Logos", imageUrl: "" },
+  { id: 3, title: "Site Exemplo", category: "Designs", link: "https://www.google.com", imageUrl: "" },
+  { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrl: "" },
+  { id: 5, title: "[Nome do Carrossel 1]", category: "Carrosseis", imageUrl: "" },
+  { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrl: "" },
+  { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrl: "" },
+  { id: 8, title: "[Nome da Arte 2]", category: "Artes", imageUrl: "" },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];
 
+// --- DADOS DAS MARCAS ---
+const brands = [
+  "CLIENTE PRESTÍGIO", "INOVAÇÃO CORP", "ESTÚDIO VISUAL", "TECNOLOGIA LTDA", "SALVADOR CREATIVE",
+  "CLIENTE PRESTÍGIO", "INOVAÇÃO CORP", "ESTÚDIO VISUAL", "TECNOLOGIA LTDA", "SALVADOR CREATIVE" 
+];
+
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("Todos");
+  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+
+  useEffect(() => {
+    if (selectedImage) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+  }, [selectedImage]);
 
   const filteredItems = activeFilter === "Todos" 
     ? portfolioItems 
     : portfolioItems.filter(item => item.category === activeFilter);
 
+  const handleCardClick = (item: PortfolioItem) => {
+    if (item.link) {
+      window.open(item.link, "_blank"); 
+    } else {
+      setSelectedImage(item); 
+    }
+  };
+
   return (
-    <main className="min-h-screen relative selection:bg-blue-600 selection:text-white">
+    <main className="min-h-screen relative selection:bg-blue-600 selection:text-white pb-10">
       
+      {/* --- HEADER FIXO --- */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-[#030303]/80 backdrop-blur-md border-b border-zinc-900/50 transition-all">
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center">
+          {/* Corrigido para font-bold */}
+          <a href="#" className="text-2xl font-bold tracking-tighter text-white">
+            KENAI<span className="text-blue-500">.</span>
+          </a>
+          
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+            <a href="#trabalhos" className="hover:text-white transition-colors">Trabalhos</a>
+            <a href="#marcas" className="hover:text-white transition-colors">Marcas</a>
+            <a href="#sobre" className="hover:text-white transition-colors">Sobre mim</a>
+            <a href="#contato" className="hover:text-white transition-colors">Contato</a>
+          </nav>
+        </div>
+      </header>
+
       {/* --- BACKGROUND GLOW EFFECTS --- */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none" />
 
       {/* --- HERO SECTION --- */}
-      <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
+      <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden pt-20">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,12 +93,13 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-md"
           >
-            <span className="text-sm font-medium tracking-wide text-zinc-300">
+            <span className="text-sm font-medium tracking-wide text-zinc-100">
               Transformando ideias em código e design
             </span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-6">
+          {/* Corrigido para font-bold */}
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6">
             KENAI <span className="text-gradient">DESIGN</span>
           </h1>
           
@@ -74,13 +115,13 @@ export default function Home() {
           transition={{ delay: 1.5, duration: 1 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-xs uppercase tracking-[0.3em] text-zinc-500">Scroll</span>
+          <span className="text-xs uppercase tracking-widest text-zinc-500">Scroll</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-zinc-500 to-transparent" />
         </motion.div>
       </section>
 
       {/* --- PORTFÓLIO E FILTROS --- */}
-      <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10 relative">
+      <section id="trabalhos" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10 relative scroll-mt-20">
         <div className="flex flex-col items-center mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
@@ -91,7 +132,6 @@ export default function Home() {
             Trabalhos Selecionados
           </motion.h2>
           
-          {/* Filtros Animados */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -119,30 +159,36 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Grid de Projetos com AnimatePresence */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
-                layout
+                layoutId={`card-${item.id}`} 
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.4, type: "spring" }}
+                onClick={() => handleCardClick(item)}
                 className="group relative aspect-[4/5] bg-zinc-900/50 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800/50 hover:border-blue-500/30 transition-all"
               >
-                <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/20 group-hover:bg-zinc-800/40 transition-colors duration-500">
-                  <span className="text-zinc-600 font-mono text-sm opacity-50">[ Imagem: {item.title} ]</span>
-                </div>
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/20 group-hover:bg-zinc-800/40 transition-colors duration-500">
+                    <span className="text-zinc-600 text-sm opacity-50">[ Img: {item.title} ]</span>
+                  </div>
+                )}
                 
-                <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                
+                <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-blue-400 text-xs font-mono uppercase tracking-wider mb-2">{item.category}</p>
+                      <p className="text-blue-400 text-xs font-medium uppercase tracking-wider mb-2">{item.category}</p>
                       <h3 className="text-xl font-bold text-white">{item.title}</h3>
                     </div>
-                    <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500 delay-100">
+                    <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500 delay-100 shrink-0 ml-4">
                       <ArrowUpRight className="w-5 h-5" />
                     </div>
                   </div>
@@ -153,23 +199,34 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* --- CLIENTES --- */}
-      <section className="py-24 border-y border-zinc-900/50 bg-zinc-950/30 relative z-10">
-        <div className="max-w-[1400px] mx-auto px-6 overflow-hidden">
-          <p className="text-center text-zinc-500 font-mono text-sm uppercase tracking-[0.2em] mb-12">
+      {/* --- CLIENTES (Ticker Infinito para a DIREITA) --- */}
+      <section id="marcas" className="py-24 border-y border-zinc-900/50 bg-zinc-950/30 relative z-10 scroll-mt-20 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 mb-12">
+          <p className="text-center text-zinc-500 text-sm uppercase tracking-[0.2em]">
             Marcas que confiam no trabalho
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-            <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 1 ]</span>
-            <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 2 ]</span>
-            <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 3 ]</span>
-            <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 4 ]</span>
-          </div>
+        </div>
+        
+        <div className="w-full relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <motion.div 
+            className="flex gap-24 shrink-0 w-max px-12"
+            animate={{ x: ["-50%", "0%"] }} 
+            transition={{ repeat: Infinity, ease: "linear", duration: 25 }} 
+          >
+            {brands.map((brand, index) => (
+              <span 
+                key={index} 
+                className="text-2xl md:text-3xl font-bold text-zinc-600 hover:text-zinc-200 transition-colors whitespace-nowrap"
+              >
+                {brand}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* --- SOBRE MIM --- */}
-      <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto relative z-10">
+      <section id="sobre" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto relative z-10 scroll-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
           <motion.div 
@@ -177,12 +234,12 @@ export default function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 flex justify-center lg:justify-start"
           >
-            <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 relative group">
-              <div className="absolute inset-0 flex items-center justify-center text-zinc-600 flex-col gap-4">
-                <Palette className="w-12 h-12 opacity-50" />
-                <span className="text-lg font-mono tracking-widest uppercase">[ Foto Kenai Almeida ]</span>
+            <div className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 relative group shrink-0 shadow-2xl">
+              <div className="absolute inset-0 flex items-center justify-center text-zinc-600 flex-col gap-4 text-center p-4">
+                <Palette className="w-10 h-10 opacity-50" />
+                <span className="text-sm tracking-widest uppercase">[ Sua Logo Aqui ]</span>
               </div>
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/50 rounded-3xl transition-colors duration-500 pointer-events-none" />
             </div>
@@ -195,10 +252,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter">
+            <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tighter text-center lg:text-left">
               Sobre <span className="text-blue-500">mim.</span>
             </h2>
-            <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed">
+            <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed text-center lg:text-left">
               <p>
                 Olá, eu sou o Kenai Almeida. Aos 19 anos, residindo em Salvador, Bahia, dedico minha trajetória a construir o futuro da web.
               </p>
@@ -206,7 +263,7 @@ export default function Home() {
                 Atuo como Programador Full Stack, Web Designer e Designer Gráfico. Minha formação em Tecnologia da Internet pelo SENAI/CIMATEC me proporcionou a base técnica necessária para entender que um bom design não é apenas visualmente atraente, mas também estruturalmente impecável e focado em conversão.
               </p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
                 <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-2xl">
                   <Code className="text-blue-500 mb-4 w-8 h-8" />
                   <h4 className="text-white font-bold mb-2">Desenvolvimento</h4>
@@ -224,12 +281,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
-      <footer className="py-16 border-t border-zinc-900 bg-[#020202] relative z-10">
+      {/* --- FOOTER / CONTATO --- */}
+      <footer id="contato" className="py-16 border-t border-zinc-900 bg-[#020202] relative z-10">
         <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           
           <div className="text-center md:text-left">
-            <h3 className="text-3xl font-black tracking-tighter text-white mb-2">
+            {/* Corrigido para font-bold */}
+            <h3 className="text-3xl font-bold tracking-tighter text-white mb-2">
               KENAI<span className="text-blue-500">.</span>
             </h3>
             <p className="text-zinc-500 text-sm">Elevando marcas através do design e tecnologia.</p>
@@ -252,13 +310,56 @@ export default function Home() {
             </a>
             <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
               <span className="text-zinc-300 font-medium">Contato</span>
-              <span>(71) 99739-1105</span>
+              <span>(71) 99338-3703</span>
               <span>kenaidesign22@gmail.com</span>
             </div>
           </div>
 
         </div>
       </footer>
+
+      {/* --- MODAL DE IMAGEM FULLSCREEN --- */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-sm"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-white rounded-full transition-colors z-[110]"
+              onClick={() => setSelectedImage(null)}
+            >
+              <XIcon className="w-6 h-6" />
+            </button>
+
+            <motion.div 
+              layoutId={`card-${selectedImage.id}`} 
+              className="relative w-full max-w-6xl max-h-full bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex flex-col items-center justify-center"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              {selectedImage.imageUrl ? (
+                <img 
+                  src={selectedImage.imageUrl} 
+                  alt={selectedImage.title} 
+                  className="w-full max-h-[85vh] object-contain bg-black" 
+                />
+              ) : (
+                <div className="w-full aspect-video flex items-center justify-center bg-zinc-800 p-8 text-center">
+                  <span className="text-zinc-500 text-xl">[ Sua Imagem de {selectedImage.title} aparecerá gigante aqui ]</span>
+                </div>
+              )}
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">{selectedImage.category}</p>
+                <h3 className="text-3xl font-bold text-white">{selectedImage.title}</h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
     </main>
   );

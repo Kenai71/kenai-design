@@ -12,24 +12,22 @@ const Palette = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox
 const Smartphone = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>);
 const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
 
-// --- DADOS DO PORTFÓLIO (AGORA ACEITA MÚLTIPLAS IMAGENS) ---
-// Para adicionar mais imagens, basta separar por vírgula: imageUrls: ["/img/f1.png", "/img/f2.png"]
 type PortfolioItem = { id: number; title: string; category: string; link?: string; imageUrls: string[] };
 
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, title: "[Nome da Arte 1]", category: "Artes", imageUrls: [] },
-  { id: 2, title: "[Nome do Logo 1]", category: "Logos", imageUrls: [] },
-  { id: 3, title: "Site Exemplo", category: "Designs", link: "https://www.google.com", imageUrls: [] },
+  { id: 1, title: "Capa Portfólio", category: "Artes", imageUrls: ["/img/portfolio1.png"] },
+  { id: 2, title: "Logo Kenzo AI", category: "Logos", imageUrls: ["/img/kenzo.png"] },
+  { id: 3, title: "Site Exemplo", category: "Designs", link: "https://barbearia-eta-umber.vercel.app/", imageUrls: ["/img/site-barbeiro.png"] },
   { id: 4, title: "[Nome do Story 1]", category: "Storys", imageUrls: [] },
-  { id: 5, title: "Exemplo Carrossel (Múltiplo)", category: "Carrosseis", imageUrls: [] }, // Coloque várias URLs aqui dentro depois
-  { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrls: [] },
-  { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrls: [] },
-  { id: 8, title: "[Nome da Arte 2]", category: "Artes", imageUrls: [] },
+  { id: 5, title: "Exemplo Carrossel (Múltiplo)", category: "Carrosseis", imageUrls: [] },
+  { id: 6, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/post-insta.png"] },
+  { id: 7, title: "Modelo de Logo", category: "Logos", imageUrls: ["/img/logo1.png"] },
+  { id: 8, title: "[Nome da Arte 2]", category: "Artes", imageUrls: ["/img/enzo-body.png"] },
+
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];
 
-// --- DADOS DAS MARCAS (AGORA ACEITA IMAGENS E TEXTO) ---
 type BrandItem = { type: "image"; src: string; alt: string } | { type: "text"; content: string };
 
 const brands: BrandItem[] = [
@@ -37,9 +35,9 @@ const brands: BrandItem[] = [
   { type: "image", src: "/img/patty.png", alt: "Patty" },
   { type: "image", src: "/img/logo-barbeiro.png", alt: "Barbeiro" },
   { type: "image", src: "/img/kells.png", alt: "Kells" },
-  { type: "text", content: "CLIENTE PRESTÍGIO" }, // Se quiser colocar um só com texto, é assim!
+  { type: "text", content: "CLIENTE PRESTÍGIO" },
   
-  // Duplicando a lista para garantir que a rolagem infinita não quebre (Fique suave)
+  // Duplicando a lista para garantir que a rolagem infinita não quebre
   { type: "image", src: "/img/arkad.png", alt: "Arkad" },
   { type: "image", src: "/img/patty.png", alt: "Patty" },
   { type: "image", src: "/img/logo-barbeiro.png", alt: "Barbeiro" },
@@ -204,7 +202,7 @@ export default function Home() {
                   }`}
                 >
                   {activeFilter === cat && (
-                    <motion.div layoutId="active-pill" className="absolute inset-0 bg-white rounded-full" transition={{ type: "spring", stiffness: 300, damping: 25 }} />
+                    <motion.div layoutId="active-pill" className="absolute inset-0 bg-white rounded-full" transition={{ duration: 0.2 }} />
                   )}
                   <span className="relative z-10">{cat}</span>
                 </button>
@@ -217,15 +215,14 @@ export default function Home() {
               {filteredItems.map((item) => (
                 <motion.div
                   key={item.id}
-                  layoutId={`card-${item.id}`} 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.4, type: "spring" }}
+                  layout // Mantém o layout para organizar o grid, mas sem o elástico (spring)
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }} // Animação de fade-in simples
                   onClick={() => handleCardClick(item)}
                   className="group relative aspect-[4/5] bg-zinc-900/50 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800/50 hover:border-blue-500/30 transition-all"
                 >
-                  {/* Na tela principal, mostra apenas a PRIMEIRA IMAGEM (índice 0) */}
                   {item.imageUrls && item.imageUrls.length > 0 ? (
                     <img src={item.imageUrls[0]} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   ) : (
@@ -253,7 +250,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* --- CLIENTES (CARROSSEL COM IMAGENS E TEXTO) --- */}
+        {/* --- CLIENTES (CARROSSEL) --- */}
         <section id="marcas" className="py-24 border-y border-zinc-900/50 bg-zinc-950/30 relative z-10 scroll-mt-20 overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-6 mb-16">
             <p className="text-center text-zinc-500 text-sm uppercase tracking-[0.2em]">Marcas que confiam no trabalho</p>
@@ -262,7 +259,7 @@ export default function Home() {
             <motion.div 
               className="flex items-center gap-16 md:gap-24 shrink-0 w-max px-12"
               animate={{ x: ["-50%", "0%"] }} 
-              transition={{ repeat: Infinity, ease: "linear", duration: 30 }} // Deixei 30s pra passar suave
+              transition={{ repeat: Infinity, ease: "linear", duration: 30 }} 
             >
               {brands.map((brand, index) => (
                 <div key={index} className="flex items-center justify-center shrink-0">
@@ -270,7 +267,8 @@ export default function Home() {
                     <img 
                       src={brand.src} 
                       alt={brand.alt} 
-                      className="h-12 md:h-16 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" 
+                      // AQUI: Aumentei o tamanho das imagens das marcas (h-20 md:h-28)
+                      className="h-20 md:h-28 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" 
                     />
                   ) : (
                     <span className="text-2xl md:text-3xl font-bold text-zinc-600 hover:text-zinc-200 transition-colors whitespace-nowrap">
@@ -354,22 +352,27 @@ export default function Home() {
           </div>
         </footer>
 
-        {/* --- MODAL DE IMAGEM FULLSCREEN (SCROLL MÚLTIPLAS IMAGENS) --- */}
+        {/* --- MODAL DE IMAGEM FULLSCREEN (ANIMAÇÃO SIMPLES FADE-IN) --- */}
         <AnimatePresence>
           {selectedItem && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-12 backdrop-blur-sm"
               onClick={() => setSelectedItem(null)}
             >
               <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-white rounded-full transition-colors z-[110]" onClick={() => setSelectedItem(null)}><XIcon className="w-6 h-6" /></button>
               
-              <motion.div layoutId={`card-${selectedItem.id}`} className="relative w-full max-w-6xl max-h-[90vh] bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex flex-col" onClick={(e) => e.stopPropagation()}>
-                
-                {/* --- ÁREA DE SCROLL (ONDE FICAM AS VÁRIAS IMAGENS) --- */}
-                {/* Esconde a barra de scroll no estilo Tailwind para ficar clean */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="relative w-full max-w-6xl max-h-[90vh] bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex flex-col" 
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="flex-1 overflow-y-auto bg-black p-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {selectedItem.imageUrls && selectedItem.imageUrls.length > 0 ? (
                     <div className="flex flex-col gap-2">
@@ -384,7 +387,6 @@ export default function Home() {
                   )}
                 </div>
                 
-                {/* Informações Fixas em Baixo */}
                 <div className="p-6 bg-gradient-to-t from-black/90 to-black/80 shrink-0 border-t border-zinc-800/50">
                   <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">{selectedItem.category}</p>
                   <h3 className="text-3xl font-bold text-white">{selectedItem.title}</h3>

@@ -290,7 +290,7 @@ export default function Home() {
                 Sobre <span className="text-blue-500">mim.</span>
               </h2>
               <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed text-center lg:text-left">
-                <p>Olá, eu sou o Kenai Almeida. Aos 19 anos, residindo em Salvador, Bahia, dedico minha trajetória a construir o futuro da web.</p>
+                <p>Olá, eu sou o Kenai Almeida. Aos 19 anos, dedico minha trajetória a construir o futuro da web.</p>
                 <p>Atuo como Programador Full Stack, Web Designer e Designer Gráfico. Minha formação em Tecnologia da Internet pelo SENAI/CIMATEC me proporcionou a base técnica necessária para entender que um bom design não é apenas visualmente atraente, mas também estruturalmente impecável e focado em conversão.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
                   <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-2xl">
@@ -324,7 +324,7 @@ export default function Home() {
               <a href="mailto:kenaidesign22@gmail.com" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Mail className="w-5 h-5" /></a>
               <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
                 <span className="text-zinc-300 font-medium">Contato</span>
-                <span>(71) 99338-3703</span>
+                <span>(71) 99739-1105</span>
                 <span>kenaidesign22@gmail.com</span>
               </div>
             </div>

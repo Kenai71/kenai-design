@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Instagram, Mail, ArrowUpRight, Code, Palette, Smartphone } from "lucide-react";
 
-// --- DADOS TEMPORÁRIOS (Para você substituir depois) ---
+// --- DADOS TEMPORÁRIOS ---
 const portfolioItems = [
   { id: 1, title: "[Nome da Arte 1]", category: "Artes" },
   { id: 2, title: "[Nome do Logo 1]", category: "Logos" },
@@ -125,12 +125,10 @@ export default function Home() {
                 transition={{ duration: 0.4, type: "spring" }}
                 className="group relative aspect-[4/5] bg-zinc-900/50 rounded-2xl overflow-hidden cursor-pointer border border-zinc-800/50 hover:border-blue-500/30 transition-all"
               >
-                {/* Placeholder para a Imagem */}
                 <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/20 group-hover:bg-zinc-800/40 transition-colors duration-500">
                   <span className="text-zinc-600 font-mono text-sm opacity-50">[ Imagem: {item.title} ]</span>
                 </div>
                 
-                {/* Overlay de Informações (Revela no Hover) */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
                   <div className="flex justify-between items-end">
                     <div>
@@ -155,7 +153,6 @@ export default function Home() {
             Marcas que confiam no trabalho
           </p>
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-            {/* Placeholders de Clientes */}
             <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 1 ]</span>
             <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 2 ]</span>
             <span className="text-2xl md:text-3xl font-bold font-serif">[ Logo Cliente 3 ]</span>
@@ -176,7 +173,6 @@ export default function Home() {
             className="lg:col-span-5 relative"
           >
             <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 relative group">
-              {/* Placeholder da sua Foto */}
               <div className="absolute inset-0 flex items-center justify-center text-zinc-600 flex-col gap-4">
                 <Palette className="w-12 h-12 opacity-50" />
                 <span className="text-lg font-mono tracking-widest uppercase">[ Foto Kenai Almeida ]</span>

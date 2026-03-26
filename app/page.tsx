@@ -23,6 +23,7 @@ const portfolioItems: PortfolioItem[] = [
   { id: 6, title: "[Nome da Foto 1]", category: "Fotografia", imageUrl: "" },
   { id: 7, title: "[Nome do Logo 2]", category: "Logos", imageUrl: "" },
   { id: 8, title: "Capa de Ebook", category: "Artes", imageUrl: "/img/capa-ebook.png" },
+  { id: 9, title: "Faixa de Youtube", category: "Artes", imageUrl: "/img/enzo-body.png" },
 ];
 
 const categories = ["Todos", "Artes", "Logos", "Designs", "Storys", "Carrosseis", "Fotografia"];

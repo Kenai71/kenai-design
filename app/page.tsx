@@ -43,7 +43,7 @@ const portfolioItems: PortfolioItem[] = [
   { id: 11, title: "Modelo de Estoque", category: "Designs", imageUrls: ["/img/design/modelo-estoque.jpeg"], showInAll: false },
   { id: 12, title: "Modelo Carrosseis para Arkad", category: "Carrosseis", imageUrls: ["/img/carrossel/carrossel1-1.png", "/img/carrossel/carrossel1-2.png", "/img/carrossel/carrossel1-3.png"], showInAll: false },
   { id: 13, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/fotografia/foto1.png"], showInAll: false },
-  { id: 14, title: "Modelo de Site imobiliario", category: "Designs",link: "https://modelo-imobiliaria.vercel.app/", imageUrls: ["/img/design/modelo-imobiliario.png"], showInAll: false },
+  { id: 14, title: "Modelo de Site imobiliario", category: "Designs",link: "https://modelo-imobiliaria.vercel.app/", imageUrls: ["/img/design/modelo-imobiliario.jpeg"], showInAll: false },
   
 ]
 

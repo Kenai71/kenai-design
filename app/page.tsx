@@ -13,6 +13,81 @@ const Smartphone = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" view
 const XIcon = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
 const ChevronLeft = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="15 18 9 12 15 6"/></svg>);
 const ChevronRight = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="9 18 15 12 9 6"/></svg>);
+const Globe = (props: any) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>);
+
+// --- TRADUÇÕES ---
+const categoriesEn: Record<string, string> = { "Todos": "All", "Artes": "Arts", "Logos": "Logos", "Designs": "Designs", "Storys": "Stories", "Carrosseis": "Carousels", "Fotografia": "Photography" };
+const categoriesEs: Record<string, string> = { "Todos": "Todos", "Artes": "Artes", "Logos": "Logos", "Designs": "Diseños", "Storys": "Historias", "Carrosseis": "Carruseles", "Fotografia": "Fotografía" };
+
+const portfolioTitlesEn: Record<string, string> = {
+  "Capa de Portfólio": "Portfolio Cover",
+  "Logo Kenzo AI": "Kenzo AI Logo",
+  "Site Barbeiro": "Barbershop Website",
+  "Story Instagram": "Instagram Story",
+  "Modelo de Carrossel": "Carousel Template",
+  "Ensaio Fotográfico": "Photo Shoot",
+  "Modelo de Logo": "Logo Template",
+  "Faixa de Youtube": "YouTube Banner",
+  "Convite de Aniversário": "Birthday Invitation",
+  "Landing Page": "Landing Page",
+  "Modelo de Estoque": "Inventory System Template",
+  "Modelo Carrosseis para Arkad": "Arkad Carousels Template",
+  "Modelo de Site imobiliario": "Real Estate Website Template",
+  "Modelo de PetShop": "PetShop Template"
+};
+
+const portfolioTitlesEs: Record<string, string> = {
+  "Capa de Portfólio": "Portada de Portafolio",
+  "Logo Kenzo AI": "Logo Kenzo AI",
+  "Site Barbeiro": "Sitio Web de Barbería",
+  "Story Instagram": "Historia de Instagram",
+  "Modelo de Carrossel": "Plantilla de Carrusel",
+  "Ensaio Fotográfico": "Sesión Fotográfica",
+  "Modelo de Logo": "Plantilla de Logo",
+  "Faixa de Youtube": "Banner de YouTube",
+  "Convite de Aniversário": "Invitación de Cumpleaños",
+  "Landing Page": "Landing Page",
+  "Modelo de Estoque": "Plantilla de Sistema de Inventario",
+  "Modelo Carrosseis para Arkad": "Plantilla de Carruseles para Arkad",
+  "Modelo de Site imobiliario": "Plantilla de Sitio Web Inmobiliario",
+  "Modelo de PetShop": "Plantilla de PetShop"
+};
+
+const getTranslatedTitle = (title: string, language: string) => {
+  if (language === "en") return portfolioTitlesEn[title] || title;
+  if (language === "es") return portfolioTitlesEs[title] || title;
+  return title;
+};
+
+const translations = {
+  pt: {
+    nav: { work: "Trabalhos", brands: "Marcas", about: "Sobre mim", contact: "Contato" },
+    hero: { tag: "Transformando ideias em código e design", desc: "Experiências digitais imersivas, identidades visuais marcantes e desenvolvimento de alta performance." },
+    work: { title: "Trabalhos Selecionados" },
+    brands: { title: "Marcas que confiam no trabalho" },
+    about: { title1: "Sobre", title2: "mim.", p1: "Olá, eu sou o Kenai Almeida. Aos 19 anos, residindo em Salvador, Bahia, dedico minha trajetória a construir o futuro da web.", p2: "Atuo como Programador Full Stack, Web Designer e Designer Gráfico. Minha formação em Tecnologia da Internet pelo SENAI/CIMATEC me proporcionou a base técnica necessária para entender que um bom design não é apenas visualmente atraente, mas também estruturalmente impecável e focado em conversão.", devTitle: "Desenvolvimento", devDesc: "Aplicações web modernas, rápidas e escaláveis.", uiTitle: "UI/UX Design", uiDesc: "Interfaces focadas na melhor experiência do usuário." },
+    footer: { subtitle: "Elevando marcas através do design e tecnologia.", contact: "Contato" },
+    modal: { missingImgs: "[ Suas Imagens de", willAppear: "aparecerão aqui ]" }
+  },
+  en: {
+    nav: { work: "Work", brands: "Brands", about: "About me", contact: "Contact" },
+    hero: { tag: "Transforming ideas into code and design", desc: "Immersive digital experiences, striking visual identities, and high-performance development." },
+    work: { title: "Selected Work" },
+    brands: { title: "Brands that trust my work" },
+    about: { title1: "About", title2: "me.", p1: "Hello, I'm Kenai Almeida. At 19, living in Salvador, Bahia, I dedicate my journey to building the future of the web.", p2: "I work as a Full Stack Programmer, Web Designer, and Graphic Designer. My background in Internet Technology from SENAI/CIMATEC has given me the technical foundation to understand that good design is not just visually appealing, but also structurally flawless and conversion-focused.", devTitle: "Development", devDesc: "Modern, fast, and scalable web applications.", uiTitle: "UI/UX Design", uiDesc: "Interfaces focused on the best user experience." },
+    footer: { subtitle: "Elevating brands through design and technology.", contact: "Contact" },
+    modal: { missingImgs: "[ Your Images of", willAppear: "will appear here ]" }
+  },
+  es: {
+    nav: { work: "Trabajos", brands: "Marcas", about: "Sobre mí", contact: "Contacto" },
+    hero: { tag: "Transformando ideas en código y diseño", desc: "Experiencias digitales inmersivas, identidades visuales llamativas y desarrollo de alto rendimiento." },
+    work: { title: "Trabajos Seleccionados" },
+    brands: { title: "Marcas que confían en mi trabajo" },
+    about: { title1: "Sobre", title2: "mí.", p1: "Hola, soy Kenai Almeida. A los 19 años, residiendo en Salvador, Bahía, dedico mi trayectoria a construir el futuro de la web.", p2: "Trabajo como Programador Full Stack, Diseñador Web y Diseñador Gráfico. Mi formación en Tecnología de Internet por el SENAI/CIMATEC me proporcionó la base técnica necesaria para entender que un buen diseño no solo es visualmente atractivo, sino también estructuralmente impecable y enfocado en la conversión.", devTitle: "Desarrollo", devDesc: "Aplicaciones web modernas, rápidas y escalables.", uiTitle: "Diseño UI/UX", uiDesc: "Interfaces enfocadas en la mejor experiencia de usuario." },
+    footer: { subtitle: "Elevando marcas a través del diseño y la tecnología.", contact: "Contacto" },
+    modal: { missingImgs: "[ Tus Imágenes de", willAppear: "aparecerán aquí ]" }
+  }
+};
 
 // --- DADOS DO PORTFÓLIO ---
 type PortfolioItem = { 
@@ -68,6 +143,10 @@ const brands: BrandItem[] = [
 ];
 
 export default function Home() {
+  const [language, setLanguage] = useState<"pt" | "en" | "es">("pt");
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const t = translations[language];
+
   const [activeFilter, setActiveFilter] = useState("Todos");
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Controle do Carrossel do Modal
@@ -175,11 +254,38 @@ export default function Home() {
               KENAI<span className="text-blue-500">.</span>
             </a>
             <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-zinc-400">
-              <a href="#trabalhos" className="hover:text-white transition-colors">Trabalhos</a>
-              <a href="#marcas" className="hover:text-white transition-colors">Marcas</a>
-              <a href="#sobre" className="hover:text-white transition-colors">Sobre mim</a>
-              <a href="#contato" className="hover:text-white transition-colors">Contato</a>
+              <a href="#trabalhos" className="hover:text-white transition-colors">{t.nav.work}</a>
+              <a href="#marcas" className="hover:text-white transition-colors">{t.nav.brands}</a>
+              <a href="#sobre" className="hover:text-white transition-colors">{t.nav.about}</a>
+              <a href="#contato" className="hover:text-white transition-colors">{t.nav.contact}</a>
             </nav>
+
+            {/* Language Switcher */}
+            <div className="absolute right-0 md:right-0">
+              <div className="relative">
+                <button 
+                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
+                  className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+                >
+                  <Globe className="w-5 h-5" />
+                  <span className="uppercase text-xs font-bold hidden sm:inline">{language}</span>
+                </button>
+                <AnimatePresence>
+                  {isLangMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute right-0 mt-4 py-2 w-32 bg-zinc-900 border border-zinc-800 rounded-xl shadow-xl flex flex-col z-[60]"
+                    >
+                      <button onClick={() => {setLanguage("pt"); setIsLangMenuOpen(false);}} className={`px-4 py-2 text-sm text-left hover:bg-zinc-800 transition-colors ${language === "pt" ? "text-white font-bold" : "text-zinc-400"}`}>Português</button>
+                      <button onClick={() => {setLanguage("en"); setIsLangMenuOpen(false);}} className={`px-4 py-2 text-sm text-left hover:bg-zinc-800 transition-colors ${language === "en" ? "text-white font-bold" : "text-zinc-400"}`}>English</button>
+                      <button onClick={() => {setLanguage("es"); setIsLangMenuOpen(false);}} className={`px-4 py-2 text-sm text-left hover:bg-zinc-800 transition-colors ${language === "es" ? "text-white font-bold" : "text-zinc-400"}`}>Español</button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </header>
 
@@ -201,7 +307,7 @@ export default function Home() {
               className="inline-block mb-6 px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-md"
             >
               <span className="text-sm font-medium tracking-wide text-zinc-100">
-                Transformando ideias em código e design
+                {t.hero.tag}
               </span>
             </motion.div>
             
@@ -210,7 +316,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
-              Experiências digitais imersivas, identidades visuais marcantes e desenvolvimento de alta performance.
+              {t.hero.desc}
             </p>
           </motion.div>
 
@@ -234,7 +340,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-4xl md:text-6xl font-black tracking-tighter mb-10"
             >
-              Trabalhos Selecionados
+              {t.work.title}
             </motion.h2>
             
             <motion.div 
@@ -254,7 +360,9 @@ export default function Home() {
                   {activeFilter === cat && (
                     <motion.div layoutId="active-pill" className="absolute inset-0 bg-white rounded-full" transition={{ duration: 0.2 }} />
                   )}
-                  <span className="relative z-10">{cat}</span>
+                  <span className="relative z-10">
+                    {language === "pt" ? cat : language === "en" ? categoriesEn[cat] : categoriesEs[cat]}
+                  </span>
                 </button>
               ))}
             </motion.div>
@@ -275,10 +383,10 @@ export default function Home() {
                 >
                   {/* Mostra apenas a CAPA (índice 0) no grid */}
                   {item.imageUrls && item.imageUrls.length > 0 ? (
-                    <img src={item.imageUrls[0]} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <img src={item.imageUrls[0]} alt={getTranslatedTitle(item.title, language)} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/20 group-hover:bg-zinc-800/40 transition-colors duration-500">
-                      <span className="text-zinc-600 text-sm opacity-50">[ Img: {item.title} ]</span>
+                      <span className="text-zinc-600 text-sm opacity-50">[ Img: {getTranslatedTitle(item.title, language)} ]</span>
                     </div>
                   )}
                   
@@ -287,8 +395,10 @@ export default function Home() {
                   <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                     <div className="flex justify-between items-end">
                       <div>
-                        <p className="text-blue-400 text-xs font-medium uppercase tracking-wider mb-2">{item.category}</p>
-                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        <p className="text-blue-400 text-xs font-medium uppercase tracking-wider mb-2">
+                          {language === "pt" ? item.category : language === "en" ? categoriesEn[item.category] : categoriesEs[item.category]}
+                        </p>
+                        <h3 className="text-xl font-bold text-white">{getTranslatedTitle(item.title, language)}</h3>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500 delay-100 shrink-0 ml-4">
                         <ArrowUpRight className="w-5 h-5" />
@@ -304,7 +414,7 @@ export default function Home() {
         {/* --- CLIENTES --- */}
         <section id="marcas" className="py-24 border-y border-zinc-900/50 bg-zinc-950/30 relative z-10 scroll-mt-20 overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-6 mb-16">
-            <p className="text-center text-zinc-500 text-sm uppercase tracking-[0.2em]">Marcas que confiam no trabalho</p>
+            <p className="text-center text-zinc-500 text-sm uppercase tracking-[0.2em]">{t.brands.title}</p>
           </div>
           <div className="w-full relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <motion.div 
@@ -359,21 +469,21 @@ export default function Home() {
               className="lg:col-span-7"
             >
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 text-center lg:text-left">
-                Sobre <span className="text-blue-500">mim.</span>
+                {t.about.title1} <span className="text-blue-500">{t.about.title2}</span>
               </h2>
               <div className="space-y-6 text-xl text-zinc-400 font-light leading-relaxed text-center lg:text-left">
-                <p>Olá, eu sou o Kenai Almeida. Aos 19 anos, residindo em Salvador, Bahia, dedico minha trajetória a construir o futuro da web.</p>
-                <p>Atuo como Programador Full Stack, Web Designer e Designer Gráfico. Minha formação em Tecnologia da Internet pelo SENAI/CIMATEC me proporcionou a base técnica necessária para entender que um bom design não é apenas visualmente atraente, mas também estruturalmente impecável e focado em conversão.</p>
+                <p>{t.about.p1}</p>
+                <p>{t.about.p2}</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 text-left">
                   <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-2xl">
                     <Code className="text-blue-500 mb-4 w-8 h-8" />
-                    <h4 className="text-white font-bold mb-2">Desenvolvimento</h4>
-                    <p className="text-sm text-zinc-500">Aplicações web modernas, rápidas e escaláveis.</p>
+                    <h4 className="text-white font-bold mb-2">{t.about.devTitle}</h4>
+                    <p className="text-sm text-zinc-500">{t.about.devDesc}</p>
                   </div>
                   <div className="bg-zinc-900/30 border border-zinc-800 p-6 rounded-2xl">
                     <Smartphone className="text-purple-500 mb-4 w-8 h-8" />
-                    <h4 className="text-white font-bold mb-2">UI/UX Design</h4>
-                    <p className="text-sm text-zinc-500">Interfaces focadas na melhor experiência do usuário.</p>
+                    <h4 className="text-white font-bold mb-2">{t.about.uiTitle}</h4>
+                    <p className="text-sm text-zinc-500">{t.about.uiDesc}</p>
                   </div>
                 </div>
               </div>
@@ -388,14 +498,14 @@ export default function Home() {
               <h3 className="text-3xl font-black tracking-tighter text-white mb-2 uppercase">
                 KENAI<span className="text-blue-500">.</span>
               </h3>
-              <p className="text-zinc-500 text-sm">Elevando marcas através do design e tecnologia.</p>
+              <p className="text-zinc-500 text-sm">{t.footer.subtitle}</p>
             </div>
             
             <div className="flex items-center gap-6">
               <a href="https://www.instagram.com/kenai.design/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Instagram className="w-5 h-5" /></a>
               <a href="mailto:kenaidesign22@gmail.com" className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300"><Mail className="w-5 h-5" /></a>
               <div className="flex flex-col text-sm text-zinc-500 ml-4 border-l border-zinc-800 pl-6">
-                <span className="text-zinc-300 font-medium">Contato</span>
+                <span className="text-zinc-300 font-medium">{t.footer.contact}</span>
                 <span>(71) 99739-1105</span>
                 <span>kenaidesign22@gmail.com</span>
               </div>
@@ -440,7 +550,7 @@ export default function Home() {
                           exit={{ opacity: 0, x: -20 }}
                           transition={{ duration: 0.2 }}
                           src={selectedItem.imageUrls[currentImageIndex]} 
-                          alt={`${selectedItem.title} - ${currentImageIndex + 1}`} 
+                          alt={`${getTranslatedTitle(selectedItem.title, language)} - ${currentImageIndex + 1}`} 
                           className="max-w-full max-h-full object-contain" 
                         />
                       </AnimatePresence>
@@ -476,15 +586,17 @@ export default function Home() {
                     </>
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-center">
-                      <span className="text-zinc-500 text-xl px-4">[ Suas Imagens de {selectedItem.title} aparecerão aqui ]</span>
+                      <span className="text-zinc-500 text-xl px-4">{t.modal.missingImgs} {getTranslatedTitle(selectedItem.title, language)} {t.modal.willAppear}</span>
                     </div>
                   )}
                 </div>
                 
                 {/* Informações na barra de baixo */}
                 <div className="p-6 bg-zinc-900 shrink-0 border-t border-zinc-800/50">
-                  <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">{selectedItem.category}</p>
-                  <h3 className="text-3xl font-bold text-white">{selectedItem.title}</h3>
+                  <p className="text-blue-400 text-sm font-medium uppercase tracking-wider mb-1">
+                    {language === "pt" ? selectedItem.category : language === "en" ? categoriesEn[selectedItem.category] : categoriesEs[selectedItem.category]}
+                  </p>
+                  <h3 className="text-3xl font-bold text-white">{getTranslatedTitle(selectedItem.title, language)}</h3>
                 </div>
               </motion.div>
             </motion.div>

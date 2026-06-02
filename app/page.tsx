@@ -134,7 +134,7 @@ const brands: BrandItem[] = [
   { type: "image", src: "/img/logo-barbeiro.png", alt: "Barbeiro" },
   { type: "image", src: "/img/kells.png", alt: "Kells" },
   { type: "image", src: "/img/logo-sahterapeuta.png", alt: "SahTerapeuta" },
-  { type: "image", src: "/img/eco-construcao.png", alt: "Eco Construcao" }
+  { type: "image", src: "/img/eco-construcao.png", alt: "Eco Construcao" },
   
   
   { type: "image", src: "/img/arkad.png", alt: "Arkad" },

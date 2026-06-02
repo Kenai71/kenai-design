@@ -109,17 +109,17 @@ const portfolioItems: PortfolioItem[] = [
   { id: 6, title: "Site eco-construcao", category: "Designs", link: "https://eco-construcao.vercel.app/", imageUrls: ["/img/design/eco-construcao.png"], showInAll: true },
   { id: 7, title: "Modelo de Logo", category: "Logos", imageUrls: ["/img/logo1.png"], showInAll: true },
   { id: 8, title: "Faixa de Youtube", category: "Artes", imageUrls: ["/img/enzo-body.png"], showInAll: true },
+  { id: 9, title: "Modelo de Site imobiliario", category: "Designs", link: "https://modelo-imobiliaria.vercel.app/", imageUrls: ["/img/design/modelo-imobiliario.jpeg"], showInAll: true },
+  { id: 10, title: "Modelo de PetShop", category: "Designs", link: "https://modelo-petshop.vercel.app/", imageUrls: ["/img/design/modelo-petshop.png"], showInAll: true },
 
   // --- ITENS EXTRAS (NÃO aparecem em "Todos", apenas na categoria específica) ---
   // Podes adicionar mais itens aqui seguindo este modelo:
 
-  { id: 9, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
-  { id: 10, title: "Landing Page", category: "Designs", imageUrls: ["/img/modelo-landing.png"], showInAll: false },
-  { id: 11, title: "Modelo de Estoque", category: "Designs", imageUrls: ["/img/design/modelo-estoque.jpeg"], showInAll: false },
-  { id: 12, title: "Modelo Carrosseis para Arkad", category: "Carrosseis", imageUrls: ["/img/carrossel/carrossel1-1.png", "/img/carrossel/carrossel1-2.png", "/img/carrossel/carrossel1-3.png"], showInAll: false },
-  { id: 13, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/fotografia/foto1.png"], showInAll: false },
-  { id: 14, title: "Modelo de Site imobiliario", category: "Designs", link: "https://modelo-imobiliaria.vercel.app/", imageUrls: ["/img/design/modelo-imobiliario.jpeg"], showInAll: true },
-  { id: 15, title: "Modelo de PetShop", category: "Designs", link: "https://modelo-petshop.vercel.app/", imageUrls: ["/img/design/modelo-petshop.png"], showInAll: true },
+  { id: 11, title: "Convite de Aniversário", category: "Artes", imageUrls: ["/img/convite.png"], showInAll: false },
+  { id: 12, title: "Landing Page", category: "Designs", imageUrls: ["/img/modelo-landing.png"], showInAll: false },
+  { id: 13, title: "Modelo de Estoque", category: "Designs", imageUrls: ["/img/design/modelo-estoque.jpeg"], showInAll: false },
+  { id: 14, title: "Modelo Carrosseis para Arkad", category: "Carrosseis", imageUrls: ["/img/carrossel/carrossel1-1.png", "/img/carrossel/carrossel1-2.png", "/img/carrossel/carrossel1-3.png"], showInAll: false },
+  { id: 15, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/fotografia/foto1.png"], showInAll: false },
   { id: 16, title: "Ensaio Fotográfico", category: "Fotografia", imageUrls: ["/img/post-insta.png"], showInAll: false },
 ]
 

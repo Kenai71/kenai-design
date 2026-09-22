@@ -35,7 +35,8 @@ const portfolioTitlesEn: Record<string, string> = {
   "Modelo de Estoque": "Inventory System Template",
   "Modelo Carrosseis para Arkad": "Arkad Carousels Template",
   "Modelo de Site imobiliario": "Real Estate Website Template",
-  "Modelo de PetShop": "PetShop Template"
+  "Modelo de PetShop": "PetShop Template",
+  "Site Força Tech": "Força Tech Website"
 };
 
 const portfolioTitlesEs: Record<string, string> = {
@@ -52,7 +53,8 @@ const portfolioTitlesEs: Record<string, string> = {
   "Modelo de Estoque": "Plantilla de Sistema de Inventario",
   "Modelo Carrosseis para Arkad": "Plantilla de Carruseles para Arkad",
   "Modelo de Site imobiliario": "Plantilla de Sitio Web Inmobiliario",
-  "Modelo de PetShop": "Plantilla de PetShop"
+  "Modelo de PetShop": "Plantilla de PetShop",
+  "Site Força Tech": "Sitio Web Força Tech"
 };
 
 const getTranslatedTitle = (title: string, language: string) => {
@@ -113,6 +115,7 @@ const portfolioItems: PortfolioItem[] = [
   { id: 8, title: "Faixa de Youtube", category: "Artes", imageUrls: ["/img/enzo-body.png"], showInAll: true },
   { id: 9, title: "Modelo de Site imobiliario", category: "Designs", link: "https://modelo-imobiliaria.vercel.app/", imageUrls: ["/img/design/modelo-imobiliario.jpeg"], showInAll: true },
   { id: 10, title: "Modelo de PetShop", category: "Designs", link: "https://modelo-petshop.vercel.app/", imageUrls: ["/img/design/modelo-petshop.png"], showInAll: true },
+  { id: 17, title: "Site Força Tech", category: "Designs", link: "https://forca-tech.vercel.app/", imageUrls: ["/img/design/forca-tech.png"], showInAll: true },
 
   // --- ITENS EXTRAS (NÃO aparecem em "Todos", apenas na categoria específica) ---
   // Podes adicionar mais itens aqui seguindo este modelo:

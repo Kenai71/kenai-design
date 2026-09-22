@@ -6,12 +6,28 @@
   --accent: #3b82f6; 
 }
 
+html {
+  overflow-x: clip;
+  max-width: 100vw;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
-  overflow-x: hidden;
-  scroll-behavior: smooth; 
+  overflow-x: clip;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Suporte para navegadores que não suportam overflow-x: clip */
+@supports not (overflow-x: clip) {
+  html, body {
+    overflow-x: hidden;
+  }
 }
 
 ::-webkit-scrollbar {
